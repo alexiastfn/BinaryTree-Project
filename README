@@ -1,0 +1,56 @@
+Punctaj obtinut pe calculatorul propriu : 120 / 135 
+Structura "struct nod" este pentru fisiere 
+Structura "struct nodd" este pentru directoare
+(de doua ori 'd' de la 'd'irector)
+
+1. Functiile de search
+- le voi apela in cadrul altor functii 
+*search_fis(pentru fisiere): 
+-daca arborele 'a' de fisiere e NULL,se intoarce NULL
+-daca numefisier corespunde cu numele din input intorc nodul curent 'a' 
+altfel caut recursiv si in subarborii din stanga si din dreapta 
+pana dau de NULL
+*search_dir(pentru directoare): 
+-acelasi algoritm si pentru directoare
+
+2. Functiile touch si mkdir
+*touch: 
+-daca arborele e gol(a == NULL) il creez in cadrul functiei
+(aloc memorie pt el, initializez campurile) 
+-daca arborele nu egol,fac comparatia cu numele din input pt a stii daca 
+ma duc pe subarborele din stanga(mai mic) sau pe cel din dreapta(mai mare)
+*mkdir: 
+-acelasi algoritm si pentru directoare
+
+3. Functiile ls_fis,ls_dir,ls 
+- pentru a folosi ls apelez apelez ls_dir si ls_fis 
+*ls_fis:
+-recursiv,apelez subarbore stanga, printez numele, apoi subarbore dreapta 
+*ls_dir: la fel ca la fisiere
+
+4. Functiile rm,rmdir 
+*rm : 
+-cazuri simple :
+->daca nume > a->nume, apelez pe subarborele din dreapta
+->daca nume < a->nume, apelez pe subarborele din stanga
+
+- cazuri in care un subarbore este NULL:
+->daca a->stanga este NULL, a = a->dreapta 
+->daca a->dreapta este NULL, a = a->stanga
+
+- cazuri in care mai am ndouri, dupa nodul pe care vreau sa- l sterg:
+->2 auxiliare(p, q)->q va retine anteriorul lui pana->p va fi minimul,
+care se va elimina
+
+*rmdir : acelasi algoritm,
+-se elimina in plus si subfolderele si fisierele
+
+5. Functiile find_d, find_f 
+*find_d: 
+-verific daca nodul este NULL
+-il caut cu ajutorul functiei search_dir 
+-daca nu gasesc reapelez find pentru subarborii din stanga si dreapta 
+-apoi pentru arborele de subdirectoare 
+- intorc folderul 
+*find_f : 
+-la fel
